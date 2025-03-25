@@ -7,7 +7,14 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import redirect
 from .models import ChatMessage
+from django.http import HttpResponse
+from django.core.management import call_command
 
+
+
+def run_migrations(request):
+    call_command('migrate')
+    return HttpResponse("✅ Migrations completed!")
 
 # 🤖 Bot response using OpenAI
 def get_bot_response(user_input):
